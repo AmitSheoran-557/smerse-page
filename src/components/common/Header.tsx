@@ -6,19 +6,23 @@ import React, { useState, useEffect } from "react";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
+  const [scrolling, setScrolling] = useState(false);
   useEffect(() => {
-    if (open && window.innerWidth < 1024) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
+    const handleScroll = () => {
+      if (window.scrollY > 700) {
+        setScrolling(true);
+      } else {
+        setScrolling(false);
+      }
     };
-  }, [open]);
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
-    <div className="flex justify-between flex-col w-full bg-lightBlue fixed top-0">
+    <div className={`flex justify-between flex-col w-full z-[99] fixed top-0 ${scrolling ? 'bg-black' : 'bg-lightBlue'}`}>
       <div className="container max-lg:px-8 max-md:px-4 flex justify-between w-full mx-auto lg:py-4 md:py-3 py-[5px] items-center relative">
         <button onClick={() => setOpen(!open)} className={`hidden md:max-w-[39px] md:h-11 h-full max-w-5 w-full justify-center items-center max-lg:absolute max-lg:right-8 max-md:right-4 relative z-[70] max-lg:flex flex-col overflow-hidden`}>
           <span className={`w-6 transition-all duration-300 md:min-h-[5px] md:min-w-[44px] h-[3px] md:mb-2 mb-[3px] !rounded-full bg-white relative after:w-full after:h-full after:absolute after:top-0 after:left-0 ${open ? "rotate-45 md:!-mb-1 after:rotate-90 after:!rounded-sm after:bg-white !bg-white" : ""}`}></span>
@@ -44,6 +48,6 @@ const Header = () => {
       </div>
     </div>
   );
-}
+};
 
-export default Header
+export default Header;
