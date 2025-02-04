@@ -20,10 +20,20 @@ const Header = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+  useEffect(() => {
+    if (open && window.innerWidth < 1024) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
 
   return (
-    <div className={`flex justify-between flex-col w-full z-[99] fixed top-0 ${scrolling ? 'bg-black' : 'bg-lightBlue'}`}>
-      <div className="container max-lg:px-8 max-md:px-4 flex justify-between w-full mx-auto lg:py-4 md:py-3 py-[5px] items-center relative">
+    <div className={`flex justify-between flex-col w-full z-[99] fixed top-0 ${scrolling ? 'bg-black transition-all duration-300 ease-linear delay-100' : 'bg-lightBlue'}`}>
+      <div className="max-w-[1140px] px-8 max-md:px-4 flex justify-between w-full mx-auto lg:py-4 md:py-3 py-[5px] items-center relative">
         <button onClick={() => setOpen(!open)} className={`hidden md:max-w-[39px] md:h-11 h-full max-w-5 w-full justify-center items-center max-lg:absolute max-lg:right-8 max-md:right-4 relative z-[70] max-lg:flex flex-col overflow-hidden`}>
           <span className={`w-6 transition-all duration-300 md:min-h-[5px] md:min-w-[44px] h-[3px] md:mb-2 mb-[3px] !rounded-full bg-white relative after:w-full after:h-full after:absolute after:top-0 after:left-0 ${open ? "rotate-45 md:!-mb-1 after:rotate-90 after:!rounded-sm after:bg-white !bg-white" : ""}`}></span>
           <span className={`w-6 transition-all duration-300 md:min-h-[5px] md:min-w-[44px] h-[3px] md:mb-2 mb-[3px] !rounded-full bg-white ${open ? "hidden" : ""}`}></span>
@@ -38,12 +48,12 @@ const Header = () => {
               <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-white transition-all rounded-xl duration-300 ease-linear group-hover:w-full"></span>
             </Link>
           ))}
-          <div className="lg:hidden max-lg:block">
+          <div className="md:hidden max-md:block">
             <button onClick={() => setOpen(!open)} className="flex items-center justify-center leading-[120%] whitespace-nowrap custom-shadow linear-gradient text-white bg-white xl:px-[23px] lg:px-5 px-4 lg:py-[9px] py-2 rounded-lg xl:text-xl lg:text-lg text-base font-extrabold !tracking-[6%]">Mint Now</button>
           </div>
         </div>
-        <div className="lg:block max-lg:hidden">
-          <button className="flex items-center justify-center leading-[120%] whitespace-nowrap custom-shadow linear-gradient text-white bg-white xl:px-[23px] lg:px-5 px-4 lg:py-[9px] py-2 rounded-lg xl:text-xl lg:text-lg text-base font-extrabold !tracking-[6%]">Mint Now</button>
+        <div className="md:block max-md:hidden max-lg:mr-20">
+          <button className="flex items-center justify-center hover:scale-105 transition-all duration-300 ease-linear leading-[120%] whitespace-nowrap custom-shadow linear-gradient text-white bg-white xl:px-[23px] lg:px-5 md:px-[27px] px-4 lg:py-[9px] md:py-[12.5px] py-2 rounded-lg md:text-xl text-base font-extrabold !tracking-[6%]">Mint Now</button>
         </div>
       </div>
     </div>
