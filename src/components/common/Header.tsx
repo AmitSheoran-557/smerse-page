@@ -44,7 +44,7 @@ const Header = () => {
         </Link>
         <div className={`flex xl:gap-5 xl:pl-10 lg:pl-5 items-center max-lg:px-4 relative w-full max-lg:bg-black mx-auto gap-4 !text-black lg:max-h-max max-lg:fixed max-lg:top-0 max-lg:h-full max-lg:w-full max-lg:flex-col max-lg:bg-hero-pattern bg-cover bg-top max-lg:duration-300 justify-center max-lg:items-center z-[60] ${open ? "max-lg:left-0" : "max-lg:left-full"}`}>
           {HEADER_LIST.map((item, index) => (
-            <Link onClick={() => setOpen(!open)} key={index} href={item.link} className="relative lg:text-sm text-xl text-white transition-all duration-300 !tracking-[6%] ease-linear group">{item.title}
+            <Link onClick={() => setOpen(!open)} key={index} href={item.link} className="relative lg:text-sm text-xl text-white transition-all duration-300 !tracking-wide ease-linear group">{item.title}
               <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-white transition-all rounded-xl duration-300 ease-linear group-hover:w-full"></span>
             </Link>
           ))}
